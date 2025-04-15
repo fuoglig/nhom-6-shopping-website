@@ -64,7 +64,7 @@ Giao diện của dự án được lấy cảm hứng từ các trang thương 
 - **main.css:**  
   Quản lý toàn bộ giao diện website: header với background gradient, navbar, icon và hiệu ứng hover; thanh tìm kiếm có dropdown lịch sử; giỏ hàng với badge thông báo, dropdown list sản phẩm; form modal, các nút và style cho thông báo.
 - **responsive.css:**  
-  Định nghĩa media queries cho các thiết bị: mobile (<739px), tablet (740-1023px) và desktop (>1024px). Điều chỉnh hiển thị nội dung, ẩn/hiện các element không cần thiết trên thiết bị nhỏ và thay đổi kích thước font chữ, khoảng cách hợp lý.
+  Định nghĩa media queries cho các thiết bị: mobile (<=739px), tablet (740-1023px) và desktop (>=1024px). Điều chỉnh hiển thị nội dung, ẩn/hiện các element không cần thiết trên thiết bị nhỏ và thay đổi kích thước font chữ, khoảng cách hợp lý.
 
 ### 6. Assets
 - **fonts/:**  
@@ -78,30 +78,30 @@ Giao diện của dự án được lấy cảm hứng từ các trang thương 
 
 ## Cấu Trúc Thư Mục
 
-shopping-website/
-├── index.html
-├── dangnhap.html
-├── product-detail.html
-├── main.js
-├── assets/
-│   ├── css/
-│   │   ├── base.css
-│   │   ├── grid.css
-│   │   ├── main.css
-│   │   └── responsive.css
-│   ├── fonts/
-│   │   ├── fontawesome-free-6.7.2-web/
-│   │   └── GoogleFonts-Roboto/
-│   ├── img/
-│   │   ├── qr-img.png
-│   │   ├── appstore-img.png
-│   │   ├── googleplay-img.png
-│   │   ├── no-cart.png
-│   │   └── ...
-│   └── favicon_io/
-│       ├── favicon-32x32.png
-│       └── ...
-└── README.md
+- shopping-website/
+  - index.html
+  - dangnhap.html
+  - product-detail.html
+  - main.js
+  - assets/
+    - css/
+      - base.css
+      - grid.css
+      - main.css
+      - responsive.css
+    - fonts/
+      - fontawesome-free-6.7.2-web/
+      - GoogleFonts-Roboto/
+    - img/
+      - qr-img.png
+      - appstore-img.png
+      - googleplay-img.png
+      - no-cart.png
+      - ...
+    - favicon_io/
+      - favicon-32x32.png
+      - ...
+  - README.md
 
 ---
 
