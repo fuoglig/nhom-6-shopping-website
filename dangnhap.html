@@ -1,663 +1,407 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping</title>
-    <link rel="icon" type="image/x-icon" href="./assets/favicon_io/favicon-1-32x32.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <title>Đăng nhập | Shopping</title>
     <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.7.2-web/fontawesome-free-6.7.2-web/css/all.min.css">
-    <script src="main.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
+            font-size: 1.18em;
+        }
+        .login-header {
+            display: flex;
+            align-items: center;
+            padding: 32px 0 24px 0;
+            background: #fff;
+            border-bottom: 1px solid #f2f2f2;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .login-header__logo {
+            height: 48px;
+            margin-right: 12px;
+        }
+        .login-header__title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1a237e;
+            margin-right: 12px;
 
+        }
+        .login-header__text {
+            color: #222;
+            font-weight: 500;
+            font-size: 1.7em; /* Đăng nhập trên header lớn hơn */
+    font-weight: bold; /* Đậm hơn */
+        }
+        .login-main {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            min-height: 80vh;
+            background: transparent;
+        }
+        .login-form-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 32px rgba(30,40,120,0.13);
+            padding: 36px 36px 28px 36px;
+            min-width: 350px;
+            max-width: 400px;
+            margin: 60px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: none;}
+        }
+        .login-form-title {
+            font-weight: bold;
+            margin-bottom: 18px;
+            color: #1a237e;
+            letter-spacing: 1px;
+            font-size: 2.1em;
+        }
+        .login-form-qr {
+            float: right;
+            color: #1a237e;
+            background: #e3e8fd;
+            border: 1px solid #bfcaff;
+            border-radius: 4px;
+            padding: 4px 12px;
+            margin-bottom: 18px;
+            cursor: pointer;
+            font-weight: 500;
+            display: inline-block;
+            transition: background 0.2s, color 0.2s;
+            font-size: 1.15em;
+        }
+        .login-form-qr:hover {
+            background: #c5d0f7;
+            color: #3949ab;
+        }
+        .login-form label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            display: block;
+            font-size: 1.18em;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 18px;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 10px 38px 10px 12px;
+            border: 1.5px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+            transition: border 0.2s;
+            background: #f7f8fa;
+            font-size: 1.18em;
+        }
+        .login-form input:focus {
+            border: 1.5px solid #1a237e;
+            background: #fff;
+        }
+        .input-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            
+            cursor: pointer;
+            transition: color 0.2s;
+            font-size: 1.25em;
+        }
+        .input-icon:hover {
+            color: #1a237e;
+        }
+        .error-message {
+            color: #e53935;
+            font-size: 1.12em;
+            margin-bottom: 8px;
+            min-height: 18px;
+        }
+        .login-form .login-btn {
+            width: 100%;
+            background: #1a237e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 0;
+            font-size: 1.18em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .login-form .login-btn:disabled {
+            background: #bfcaff;
+            cursor: not-allowed;
+        }
+        .login-form .login-btn .spinner {
+            border: 2px solid #fff;
+            border-top: 2px solid #3949ab;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 0.7s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0);}
+            100% { transform: rotate(360deg);}
+        }
+        .login-form .login-options {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 12px 0 8px 0;
+        }
+        .login-form .login-options a {
+            color: #1a237e;
+            text-decoration: none;
+            font-size: 1.12em;
+            transition: color 0.2s;
+        }
+        .login-form .login-options a:hover {
+            text-decoration: underline;
+            color: #3949ab;
+        }
+        .login-form .login-or {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3c466d;
+    margin: 18px 0 10px 0;
+    font-size: 1em;
+    font-weight: 400;
+    letter-spacing: 1px;
+    background: transparent;
+    line-height: 1;
+    gap: 12px;
+}
+.login-form .login-or::before,
+.login-form .login-or::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e3e8fd;
+    display: block;
+}
+        .login-form .login-social {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+        }
+        .login-form .login-social button {
+            flex: 1;
+            padding: 10px 0;
+            border: 1.5px solid #bfcaff;
+            border-radius: 4px;
+            background: #f5f7fd;
+            color: #1a237e;
+            font-size: 1.15em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+            font-weight: 500;
+        }
+        .login-form .login-social button:hover {
+            background: #e3e8fd;
+            color: #3949ab;
+            border: 1.5px solid #3949ab;
+        }
+        .login-form .login-social img {
+            width: 20px;
+            height: 20px;
+        }
+        .register-link {
+            text-align:center;
+            margin-top:18px;
+            color:#888;
+            font-size: 1.12em;
+        }
+        .register-link a {
+            color:#1a237e;
+            text-decoration:none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .register-link a:hover {
+            color: #3949ab;
+            text-decoration: underline;
+        }
+        .login-header__logo {
+    height: 48px;
+    width: 160px;
+    margin-right: 18px;
+    background: #3949ab;
+    border-radius: 6px;
+    padding: 6px 18px;
+    box-shadow: 0 2px 8px rgba(30,40,120,0.10);
+    object-fit: contain;
+    display: block;
+}
+        @media (max-width: 600px) {
+            .login-form-container {
+                min-width: unset;
+                max-width: 98vw;
+                padding: 18px 4vw 18px 4vw;
+                margin: 24px 0;
+            }
+            .login-header {
+                flex-direction: column;
+                padding: 18px 0 12px 0;
+            }
+            .login-header__logo { margin-bottom: 8px;}
+        }
+        .login-header__help-fixed {
+    position: absolute;
+    right: 32px;
+    top: 38px;
+    color: #3949ab;
+    font-size: 1.08em;
+    font-weight: 400;
+    opacity: 0.85;
+    cursor: pointer;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+.login-header__help-fixed:hover {
+    color: #1a237e;
+    text-decoration: underline;
+}
+.login-header {
+    position: relative;
+}
+    </style>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
-    <div class="app">
-        <header class="header">
-            <div class="grid wide">
-                <nav class="header__navbar hide-on-mobile-tablet">
-                    <ul class="header__navbar-list">
-                        <li class="header__navbar-item header__navbar-item--has--qr header__navbar-item--separate ">
-                            Vào cửa hàng trên ứng dụng Shopping
-                            <div class="header-qr">
-                                <img src="./assets/img/qr-img.png" alt="QR Code" class="header__qr-img">
-                                <div class="header__qr-apps">
-                                    <a href="" class="header__qr-link">
-                                        <img src="./assets/img/googleplay-img.png" alt="Google Play" class="header__qr-download-img">
-                                    </a>
-
-                                    <a href="" class="header__qr-link">
-                                        <img src="./assets/img/appstore-img.png" alt="App Store" class="header__qr-download-img">
-                                    </a>
-                                    
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="header__navbar-item">
-                            <span class="header__navbar-title--no-pointer" > Kết nối</span>
-                            <a href="https://www.facebook.com/profile.php?id=100090788169751" class="header__navbar-icon-link">
-                                <i class="header__navbar-icon fa-brands fa-facebook"></i>
-                            </a>
-
-                            <a href="https://www.instagram.com/dq.ann/" class="header__navbar-icon-link">
-                                <i class="header__navbar-icon fa-brands fa-instagram"></i>
-                            </a>
-                        </li>
-                    </ul>
-    
-                    <ul class="header__navbar">
-                        <li class="header__navbar-item header__navbar-item--has-notify">
-                            <a href="" class="header__navbar-item-link">
-                                <i class="header__navbar-icon fa-solid fa-bell"></i>
-                                Thông báo
-                            </a>
-                            <div class="header__notify">
-                                <header class="header__notify-header">
-                                    <h3>Thông báo mới nhận</h3>
-                                </header>
-
-                                <ul class="header__notify-list">
-                                    <li class="header__notify-item header__notify-item--viewed">
-                                        <a href="" class="header__notify-link">
-                                            <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Mì Trộn Phô Mai Vị Cay Ottogi</span>
-                                                <span class="header__notify-description">Mô tả: Vị Cay</span>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li class="header__notify-item header__notify-item--viewed">
-                                        <a href="" class="header__notify-link">
-                                            <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Mì Trộn Phô Mai Vị Cay Ottogi</span>
-                                                <span class="header__notify-description">Mô tả: Vị Cay</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="header__notify-item header__notify-item--viewed">
-                                        <a href="" class="header__notify-link">
-                                            <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Mì Trộn Phô Mai Vị Cay Ottogi</span>
-                                                <span class="header__notify-description">Mô tả: Vị Cay</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <footer class="header__notify-footer">
-                                    <a href="" class="header__notify-footer-btn"> Xem tất cả</a>
-                                </footer>
-                            </div>
-                        </li>
-
-                        <li class="header__navbar-item">
-                            <a href="#" class="header__navbar-item-link">
-                                <i class="header__navbar-icon fa-solid fa-question"></i>
-                                Trợ giúp
-                            </a>
-                        </li>
-                         <li class="header__navbar-item header__navbar-item--bold header__navbar-item--separate">Đăng ký</li>
-                        <li class="header__navbar-item header__navbar-item--bold">Đăng nhập</li> 
-
-                        <li class="header__navbar-item header__navbar-user">
-                            <!-- <img src="https://cdn.saigontimestravel.com/storage/images/retail/wp-content/uploads/2024/03/Phong-cach-Nhat-Ban.jpg" alt="" class="header__navbar-user-img">
-                            <span class="header__navbar-user-name">Shopping</span> -->
-
-                            <ul class="header__navbar-user-menu">
-                                <li class="header__navbar-user-item">
-                                    <a href="" class="">Tài khoản của tôi</a>
-                                </li>
-
-                                <li class="header__navbar-user-item">
-                                    <a href="" class="">Địa chỉ của tôi</a>
-                                </li>
-
-                                <li class="header__navbar-user-item">
-                                    <a href="" class="">Đơn mua</a>
-                                </li>
-
-                                <li class="header__navbar-user-item header__navbar-user-item-separate">
-                                    <a href="" class="">Đăng xuất</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </nav>
-                <!-- Header with search  -->
-                <div class="header-with-search">
-                    <label for="mobile-search-checkbox" class="header__mobile-search">
-                        <i class="header__mobile-search-icon fas fa-search"></i>
-                    </label>
-                    <div class="header__logo hide-on-tablet">
-                        <a href="./index.html" class="header__logo-link">
-                            <img class="header__logo-img" src="./assets/img/shopping-logo-1.png" alt="">
-                        </a>
-                    </div>
-
-                    <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox">
-
-                    <div class="header__search">
-                        <div class="header__search-input-wrap">
-                            <input type="text" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
-                            <!-- Search history  -->
-                            <div class="header__search-history">
-                                <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
-                                <ul class="header__search-history-list">
-                                    <li class="header__search-history-item">
-                                        <a href="">Kem dưỡng da</a>
-                                    </li>
-                                    <li class="header__search-history-item">
-                                        <a href="">Quần áo nam nữ</a>
-                                    </li>
-                                    <li class="header__search-history-item">
-                                        <a href="">Giày thể thao</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="header__search-select">
-                            <span class="header__search-select-label">Trong Shop</span>
-                            <i class="header__search-select-icon fa-solid fa-angle-down"></i>
-                            
-                            <ul class="header__search-option">
-                                <li class="header__search-option-item header__search-option-item--active">
-                                    <span>Trong shop</span>
-                                    <i class="fa-solid fa-check"></i>
-                                </li>
-
-                                <li class="header__search-option-item">
-                                    <span>Ngoài shop</span>
-                                    <i class="fa-solid fa-check"></i>
-                                </li>
-                            </ul>
-                        
-                        </div>
-
-                        <button class="header__search-btn">
-                            <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Cart Layout  -->
-
-                    <div class="header__cart">
-                        <div class="header__cart-wrap">
-                            <i class="header__cart-icon fa-solid fa-cart-shopping"></i>
-                            <span class="header__cart-notice">9</span>
-
-                            <!-- No cart: header__cart-list--no-cart   -->
-                            <div class="header__cart-list">
-                                <div class="header__cart-list--no-cart">
-                                    <img src="./assets/img/no-cart.png" alt="" class="header__cart-no-cart-img">
-                                    <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
-                                </div>
-                                
-                                <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                <ul class="header__cart-list-item" id="cart-items"></ul>
-                                
-                                <div class="cart-total">
-                                    <span>Tổng tiền: $<span id="cart-total">0</span></span>
-                                </div>
-                                
-                                <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <ul class="header__sort-bar">
-                <li class="header__sort-item">
-                    <a href="" class="header__sort-link">Liên quan</a>
-                </li>
-                <li class="header__sort-item header__sort-item--active">
-                    <a href="" class="header__sort-link">Mới nhất</a>
-                </li>
-                <li class="header__sort-item">
-                    <a href="" class="header__sort-link">Bán chạy</a>
-                </li>
-                <li class="header__sort-item">
-                    <a href="" class="header__sort-link">Giá</a>
-                </li>
-            </ul>
-        </header>
-
-        <div class="app__container">
-            <div class="grid wide">
-                <div class="row sm-gutter app__content">
-                    <div class="col l-2 m-0 c-0">
-            
-                        <nav class="category">
-                            <h3 class="category__heading">
-                                <i class="category__heading-icon fa-solid fa-list-ul"></i>
-                                Danh mục
-                            </h3>
-
-                            <ul class="category-list">
-                                <li class="category-item category-item--active">
-                                    <a href="#" class="category-item__link">Thiết bị tiện ích</a>
-                                </li>
-            
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Thiết bị điện gia dụng</a>
-                                </li>
-            
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Đồ dùng phòng bếp</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Dụng cụ nhà bếp</a>
-                                </li>
-            
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Phụ kiện bàn ăn</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Chăm sóc nhà cửa</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Thời trang nam</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Thời trang nữ</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Mẹ & Bé</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Dụng cụ Make up</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Sản phẩm Skincare</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Best Seller</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-    
-                    <div class="col l-10 m-12 c-12">
-                        <div class="home-filter hide-on-mobile-tablet">
-                            <span class="home-filter__lable">Sắp xếp theo</span>
-                            <button class="home-filter__btn btn">Phổ biến</button>
-                            <button class="home-filter__btn btn btn--primary">Mới nhất</button>
-                            <button class="home-filter__btn btn">Bán chạy</button>
-
-                            <div class="select-input">
-                                <span class="select-input__label">Giá</span>
-                                <i class="select-input__icon fa-solid fa-angle-down"></i>
-                                <!-- List option -->
-                                <ul class="select-input__list">
-                                    <li class="select-input__item">
-                                        <a href="#" class="select-input__link">Giá: thấp đến cao</a>
-                                    </li>
-
-                                    <li class="select-input__item">
-                                        <a href="#" class="select-input__link">Giá: cao đến thấp</a>
-                                    </li>
-                                </ul>
-                            </div>  
-
-                            <div class="home-filter__page">
-                                <span class="home-filter__page-num">
-                                    <span class="home-filter__page-current">1</span>/14
-                                </span>
-
-                                <div class="home-filter__page-control">
-                                    <a href="" class="home-filter__page-btn home-filter__page-btn--disabled">
-                                        <i class="home-filter__page-icon fa-solid fa-angle-left"></i>
-                                    </a>
-
-                                    <a href="" class="home-filter__page-btn">
-                                        <i class="home-filter__page-icon fa-solid fa-angle-right"></i>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <nav class="mobile-category">
-                            <ul class="mobile-category__list">
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Dụng cụ & Thiết bị tiện ích</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Thiết bị điện gia dụng</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Đồ dùng phòng bếp</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Dụng cụ nhà bếp</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Phụ kiện bàn ăn</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Giặt giũ & Chăm sóc nhà</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Thời trang nam</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Thời trang nữ</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Mẹ & Bé</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Dụng cụ Make up</a>
-                                </li>
-                                <li class="mobie-category__item">
-                                    <a class="mobile-category__link" href="">Sản phẩm Skincare</a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <div class="home-product ">
-                            <div class="row sm-gutter">
-                                <!-- Product item -->
-                            </div>
-                        </div>
-
-                        <ul class="pagination home-product__pagination">
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">
-                                    <i class="pagination-item__icon fa-solid fa-angle-left"></i>
-                                </a>
-                            </li>
-
-                            <li class="pagination-item pagination-item--active">
-                                <a href="" class="pagination-item__link">1</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">2</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">3</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">4</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">5</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">...</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">14</a>
-                            </li>
-                            
-
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">
-                                    <i class="pagination-item__icon fa-solid fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-               </div>
-            </div>
-        </div>
-
-        <footer class="footer">
-            <div class="grid wide footer__content">
-                <div class="row sm-gutter">
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">Chăm sóc khách hàng</h3>
-                    
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Trung tâm trợ giúp</a>
-                            </li>
-
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Shopping</a>
-                            </li>
-
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Hướng dẫn mua hàng</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">Giới thiệu</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Giới thiệu chung</a>
-                            </li>
-
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Tuyển dụng</a>
-                            </li>
-
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Điều khoản</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">Danh mục</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Dụng cụ & Thiết bị tiện ích</a>
-                            </li>
-
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Đồ gia dụng</a>
-                            </li>
-
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">Quần áo</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">Theo dõi chúng tôi</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">
-                                    <i class="footer-item__icon fa-brands fa-facebook"></i>
-                                    Facebook
-                                </a>
-                            </li>
-
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">
-                                    <i class="footer-item__icon fa-brands fa-instagram"></i>
-                                    Instagram   
-                                </a>
-                            </li>
-
-                            <li class="footer-item">
-                                <a href="" class="footer-item__link">
-                                    <i class="footer-item__icon fa-brands fa-linkedin"></i>
-                                    Linkedin
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col l-2-4 m-8 c-12">
-                        <h3 class="footer__heading">Vào cửa hàng trên ứng dụng</h3>
-                        <div class="footer__download">
-                            <img src="./assets/img/qr-img.png" alt="QR CODE" class="footer__download-qr">
-                            <div class="footer__download-apps">
-                                <a href="" class="footer__download-app-link">
-                                    <img src="./assets/img/googleplay-img.png" alt="Google Play" class="footer__download-app-img">
-                                    
-                                </a>
-
-                                <a href="" class="footer__download-app-link">
-                                    <img src="./assets/img/appstore-img.png" alt="App Store" class="footer__download-app-img">
-                                    
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="footer__bottom">
-                <div class="grid wide">
-                    
-                        <p class="footer__text">© 2025 - Bản quyền thuộc về Công ty 6Group</p>
-                    
-                </div>
-
-            </div>
-
-        </footer>
+    <div class="login-header">
+        <a href="Trangchu.html">
+            <img src="./assets/img/shopping-logo-1.png" alt="Shopping Logo" class="login-header__logo">
+        </a>
+        <span class="login-header__text">Đăng nhập</span>
+        <span class="login-header__help-fixed"><a href="trogiup.html" >Bạn cần giúp đỡ?</a></span>
     </div>
-
-   <!-- chỗ này -->
-     <!-- Modal Layout -->
-<div class="modal">
-    <div class="modal__overlay" data-action="close-modal"></div>
-    <div class="modal__body">
-        <!-- Register Form -->
-        <div class="auth-form" data-type="register">
-            <div class="auth-form__container">
-                <div class="auth-form__header">
-                    <h3 class="auth-form__heading">Đăng ký</h3>
-                    <span class="auth-form__switch-btn" 
-                          data-action="switch-form" 
-                          data-target="login">
-                        Đăng nhập
-                    </span>
-                </div>
-                <form>
-                    <div class="auth-form__group">
-                        <input type="email" 
-                               class="auth-form__input" 
-                               placeholder="Email của bạn"
-                               required>
-                    </div>
-                    <div class="auth-form__group">
-                        <input type="password" 
-                               class="auth-form__input" 
-                               placeholder="Mật khẩu của bạn"
-                               required>
-                    </div>
-                    <div class="auth-form__group">
-                        <input type="password" 
-                               class="auth-form__input" 
-                               placeholder="Nhập lại mật khẩu"
-                               required>
-                    </div>
-                    <div class="auth-form__aside">
-                        <p class="auth-form__policy-text">
-                            Bằng việc đăng ký, bạn đồng ý với 
-                            <a href="#"class="auth-form__text-link">Điều khoản dịch vụ</a> & 
-                            <a href="#" class="auth-form__text-link">Chính sách bảo mật</a>
-                        </p>
-                    </div>
-                    <div class="auth-form__controls">
-                        <button type="button" 
-                                class="btn btn-normal auth-form__controls-back"
-                                data-action="close-modal">
-                            TRỞ LẠI
-                        </button>
-                        <button type="submit" class="btn btn--primary">ĐĂNG KÝ</button>
-                    </div>
-                </form>
-                <div class="auth-form__socials">
-                    <button class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
-                        <span class="auth-form__socials-title">Facebook</span>
-                    </button>
-                    <button class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                        <span class="auth-form__socials-title">Google</span>
-                    </button>
-                </div>
+    <div class="login-main">
+        <div class="login-form-container">
+            <div class="login-form-title">Đăng nhập</div>
+            <div class="login-form-qr" tabindex="0" title="Chức năng đang phát triển!">
+                <i class="fa-solid fa-qrcode"></i> Đăng nhập với mã QR
             </div>
-        </div>
-
-        <!-- Login Form -->
-        <div class="auth-form" data-type="login" style="display: none;">
-            <div class="auth-form__container">
-                <div class="auth-form__header">
-                    <h3 class="auth-form__heading">Đăng nhập</h3>
-                    <span class="auth-form__switch-btn"
-                          data-action="switch-form" 
-                          data-target="register">
-                        Đăng ký
-                    </span>
+            <form class="login-form" id="loginForm" autocomplete="off">
+                <div class="error-message" id="formError"></div>
+                <label for="login-username">Email/Số điện thoại/Tên đăng nhập</label>
+                <div class="input-group">
+                    <input type="text" id="login-username" placeholder="Nhập email/số điện thoại/tên đăng nhập" required>
+                    <span class="input-icon"><i class="fa-regular fa-user"></i></span>
                 </div>
-                <form action="index.html" method="GET" onsubmit="return true;">
-                    <div class="auth-form__group">
-                        <input type="email" 
-                               class="auth-form__input" 
-                               placeholder="Email của bạn">
-                    </div>
-                    <div class="auth-form__group">
-                        <input type="password" 
-                               class="auth-form__input" 
-                               placeholder="Mật khẩu của bạn">
-                    </div>
-                    <div class="auth-form__aside">
-                        <div class="auth-form__help">
-                            <a href="#" class="auth-form__help-link forgot-password">Quên mật khẩu</a>
-                            <span class="auth-form__help-separate"></span>
-                            <a href="#" class="auth-form__help-link need-help">Cần trợ giúp?</a>
-                        </div>
-                    </div>
-                    <div class="auth-form__controls">
-                        <button type="button" 
-                                class="btn btn-normal auth-form__controls-back"
-                                data-action="close-modal">
-                            TRỞ LẠI
-                        </button>
-                        <button type="submit" class="btn btn--primary">ĐĂNG NHẬP</button>
-                    </div>
-                </form>
-                <div class="auth-form__socials">
-                    <button class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
-                        <span class="auth-form__socials-title"> Facebook</span>
-                    </button>
-                    <button class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                        <span class="auth-form__socials-title"> Google</span>
-                    </button>
+                <label for="login-password">Mật khẩu</label>
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder="Nhập mật khẩu" required>
+                    <span class="input-icon" id="togglePassword" title="Hiện/ẩn mật khẩu"><i class="fa-regular fa-eye"></i></span>
                 </div>
+                <button type="submit" class="login-btn" id="loginBtn">ĐĂNG NHẬP</button>
+                <div class="login-options">
+                    <a href="#" id="forgotPassword">Quên mật khẩu?</a>
+                </div>
+                <div class="login-or">HOẶC</div>
+                <div class="login-social">
+                    <button type="button" title="Đăng nhập bằng Facebook">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="" width="20"> Facebook
+                      </button>
+                      <button type="button" title="Đăng nhập bằng Google">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="" width="20"> Google
+                      </button>
+                </div>
+            </form>
+            <div class="register-link">
+                Bạn mới biết đến Shopping? <a href="dangki.html">Đăng ký</a>
             </div>
         </div>
     </div>
-</div>
+    <script>
+        // Show/hide password
+        const passwordInput = document.getElementById('login-password');
+        const togglePassword = document.getElementById('togglePassword');
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            this.innerHTML = type === 'password'
+                ? '<i class="fa-regular fa-eye"></i>'
+                : '<i class="fa-regular fa-eye-slash"></i>';
+        });
 
+        // Validate form & loading
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const formError = document.getElementById('formError');
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formError.textContent = '';
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = 'ĐANG ĐĂNG NHẬP <span class="spinner"></span>';
 
+            // Lấy giá trị
+            const username = document.getElementById('login-username').value.trim();
+            const password = passwordInput.value.trim();
+
+            // Validate cơ bản
+            setTimeout(() => {
+                if (!username || !password) {
+                    formError.textContent = 'Vui lòng nhập đầy đủ thông tin!';
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = 'ĐĂNG NHẬP';
+                    return;
+                }
+                // Giả lập đăng nhập thành công/thất bại
+                if (username === 'user' && password === '123456') {
+                    formError.style.color = '#388e3c';
+                    formError.textContent = 'Đăng nhập thành công!';
+                    loginBtn.innerHTML = 'THÀNH CÔNG';
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1200);
+                } else {
+                    formError.style.color = '#e53935';
+                    formError.textContent = 'Tên đăng nhập hoặc mật khẩu không đúng!';
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = 'ĐĂNG NHẬP';
+                }
+            }, 900);
+        });
+
+        // Quên mật khẩu
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Chức năng quên mật khẩu đang phát triển!');
+        });
+
+        // QR login
+        document.querySelector('.login-form-qr').addEventListener('click', function() {
+            alert('Chức năng đăng nhập bằng mã QR đang phát triển!');
+        });
+    </script>
 </body>
 </html>

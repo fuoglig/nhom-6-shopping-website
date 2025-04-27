@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng của bạn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon_io/favicon-1-32x32.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.7.2-web/fontawesome-free-6.7.2-web/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f5f5fa; }
+        .cart-container {
+            width: 100%;
+    max-width: none;
+    margin: 40px 0 60px 0;
+    background: #fff;
+    border-radius: 12px;
+    padding: 48px 48px;
+    box-shadow: 0 2px 16px #0001;
+        }
+        .cart-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 28px;
+            color: #2d326b;
+            letter-spacing: 1px;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .cart-table th, .cart-table td {
+            padding: 22px 18px;
+            border-bottom: 1px solid #eee;
+            font-size: 1.35rem;
+            text-align: center;
+        }
+        .cart-table th {
+            background: #f3f4fa;
+            color: #2d326b;
+            font-weight: 600;
+        }
+        .cart-table img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        .cart-table tr:hover { background: #f7f8fd; }
+        .cart-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .cart-total {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: #1a1d3b;
+        }
+        .btn {
+            padding: 9px 22px;
+            border: none;
+            border-radius: 4px;
+            background: #2d326b;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #2d326b; }
+        .btn-remove { background: #2d326b; }
+        .btn-remove:hover { background: #2d326b; }
+        .btn-clear { background: #2d326b; color: #fff; margin-right: 8px;}
+        .btn-clear:hover { background: #2d326b; color: #fff;}
+        .btn-checkout { background: #2d326b; margin-left: 8px;}
+        .btn-checkout:hover { background: #2d326b;}
+        .cart-empty {
+            text-align: center;
+            color: #888;
+            font-size: 1.15rem;
+            margin: 40px 0;
+        }
+        .cart-qty-input {
+            width: 54px;
+            padding: 4px 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: #2d326b;
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, top 0.3s;
+        }
+        .toast.show { opacity: 1; pointer-events: auto; top: 48px;}
+        @media (max-width: 700px) {
+            .cart-container { padding: 12px 2px; }
+            .cart-table th, .cart-table td { padding: 7px 2px; font-size: 0.97rem; }
+            .cart-title { font-size: 1.3rem;}
+            .cart-total { font-size: 1.1rem;}
+            .btn { padding: 7px 12px; font-size: 0.95rem;}
+        }
+        /* Header/Footer override */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            min-width: 100%;
+            z-index: 1000;
+            background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .header-with-search {
+            padding: 12px 0 10px 0;
+        }
+        .header__navbar {
+            padding: 4px 0;
+        }
+        .app__container {
+            margin-top: 140px;
+        }
+        @media (max-width: 600px) {
+            .app__container {
+                margin-top: 100px;
+            }
+        }
+        .footer {
+            border-top: 4px solid #2d326b;
+            padding-top: 16px;
+            background-color: #fff;
+        }
+        .footer__bottom {
+            background-color: #f5f5f5;
+            padding: 8px 0px;
+            margin-top: 36px;
+        }
+        .footer__text {
+            font-size: 1.4rem;
+            margin: 0;
+            text-align: center;
+            color: #737373;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="grid wide">
+                <nav class="header__navbar hide-on-mobile-tablet">
+                    <ul class="header__navbar-list">
+                        <li class="header__navbar-item header__navbar-item--has--qr header__navbar-item--separate ">
+                            Vào cửa hàng trên ứng dụng Shopping
+                            <div class="header-qr">
+                                <img src="./assets/img/qr-img.png" alt="QR Code" class="header__qr-img">
+                                <div class="header__qr-apps">
+                                    <a href="" class="header__qr-link">
+                                        <img src="./assets/img/googleplay-img.png" alt="Google Play" class="header__qr-download-img">
+                                    </a>
+                                    <a href="" class="header__qr-link">
+                                        <img src="./assets/img/appstore-img.png" alt="App Store" class="header__qr-download-img">
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__navbar-item">
+                            <span class="header__navbar-title--no-pointer" > Kết nối</span>
+                            <a href="https://www.facebook.com/profile.php?id=100090788169751" class="header__navbar-icon-link">
+                                <i class="header__navbar-icon fa-brands fa-facebook"></i>
+                            </a>
+                            <a href="https://www.instagram.com/dq.ann/" class="header__navbar-icon-link">
+                                <i class="header__navbar-icon fa-brands fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="header__navbar">
+                        <li class="header__navbar-item header__navbar-item--has-notify">
+                            <a href="#" class="header__navbar-item-link">
+                                <i class="header__navbar-icon fa-solid fa-bell"></i>
+                                Thông báo
+                            </a>
+                            <div class="header__notify">
+                                <header class="header__notify-header">
+                                    <h3>Thông báo mới nhận</h3>
+                                </header>
+                                <ul class="header__notify-list" id="notify-items">
+                                    <li class="header__notify-item header__notify-item--viewed">
+                                        <a href="#" class="header__notify-link">
+                                            <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
+                                            <div class="header__notify-info">
+                                                <span class="header__notify-name"></span>
+                                                <span class="header__notify-description"></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="header__notify-item header__notify-item--viewed">
+                                        <a href="#" class="header__notify-link">
+                                            <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
+                                            <div class="header__notify-info">
+                                                <span class="header__notify-name"></span>
+                                                <span class="header__notify-description"></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="header__notify-item header__notify-item--viewed">
+                                        <a href="#" class="header__notify-link">
+                                            <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
+                                            <div class="header__notify-info">
+                                                <span class="header__notify-name"></span>
+                                                <span class="header__notify-description"></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <footer class="header__notify-footer">
+                                    <a href="#" class="header__notify-footer-btn"> Xem tất cả</a>
+                                </footer>
+                            </div>
+                        </li>
+                        <li class="header__navbar-item">
+                            <a href="trogiup.html" class="header__navbar-item-link">
+                                <i class="header__navbar-icon fa-solid fa-question"></i>
+                                Trợ giúp
+                            </a>
+                        </li>
+                        <li class="header__navbar-item header__navbar-user">
+                            <img src="https://cdn.saigontimestravel.com/storage/images/retail/wp-content/uploads/2024/03/Phong-cach-Nhat-Ban.jpg" alt="" class="header__navbar-user-img">
+                            <span class="header__navbar-user-name">Shopping</span>
+                            <ul class="header__navbar-user-menu">
+                                <li class="header__navbar-user-item">
+                                    <a href="#" class="">Tài khoản của tôi</a>
+                                </li>
+                                <li class="header__navbar-user-item">
+                                    <a href="#" class="">Địa chỉ của tôi</a>
+                                </li>
+                                <li class="header__navbar-user-item">
+                                    <a href="#" class="">Đơn mua</a>
+                                </li>
+                                <li class="header__navbar-user-item header__navbar-user-item-separate">
+                                    <a href="dangnhap.html" class="">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="header-with-search">
+                    <div class="header__logo hide-on-tablet">
+                        <a href="./index.html" class="header__logo-link">
+                            <img class="header__logo-img" src="./assets/img/shopping-logo-1.png" alt="">
+                        </a>
+                    </div>
+                    <div class="header__search" style="max-width:400px;margin:auto;">
+                        <input type="text" class="header__search-input" placeholder="Tìm kiếm sản phẩm">
+                        <button class="header__search-btn">
+                            <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                    <div class="header__cart">
+                        <!-- <div class="header__cart-wrap">
+                            <i class="header__cart-icon fa-solid fa-cart-shopping"></i> -->
+                            <!-- <span class="header__cart-notice" id="cart-notice">0</span> -->
+                            <div class="header__cart-list">
+                                <div class="header__cart-list--no-cart">
+                                    <img src="./assets/img/no-cart.png" alt="" class="header__cart-no-cart-img">
+                                    <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
+                                </div>
+                                <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                                <ul class="header__cart-list-item" id="cart-items"></ul>
+                                <div class="cart-total">
+                                    <span>Tổng tiền: $<span id="cart-total-mini">0</span></span>
+                                </div>
+                                <a href="cart.html" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- MAIN CART -->
+        <div class="app__container">
+            <div class="cart-container">
+                <div class="cart-title">Giỏ hàng của bạn</div>
+                <div id="cart-content"></div>
+                <div class="cart-actions" id="cart-actions">
+                    <div>
+                        <a href="index.html" class="btn">Tiếp tục mua sắm</a>
+                        <button class="btn btn-clear" id="btn-clear-cart"><i class="fa fa-trash"></i> Xóa tất cả</button>
+                    </div>
+                    <span class="cart-total">Tổng tiền: $<span id="cart-total">0</span></span>
+                    <button class="btn btn-checkout" id="btn-checkout"><i class="fa fa-credit-card"></i> Thanh toán</button>
+                </div>
+            </div>
+        </div>
+        <div class="toast" id="toast"></div>
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="grid wide footer__content">
+                <div class="row sm-gutter">
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Trung tâm trợ giúp</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Shopping</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Hướng dẫn mua hàng</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Giới thiệu</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Giới thiệu chung</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Tuyển dụng</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Điều khoản</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Danh mục</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Dụng cụ & Thiết bị tiện ích</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Đồ gia dụng</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">Quần áo</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Theo dõi chúng tôi</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">
+                                    <i class="footer-item__icon fa-brands fa-facebook"></i>
+                                    Facebook
+                                </a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">
+                                    <i class="footer-item__icon fa-brands fa-instagram"></i>
+                                    Instagram   
+                                </a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#" class="footer-item__link">
+                                    <i class="footer-item__icon fa-brands fa-linkedin"></i>
+                                    Linkedin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-8 c-12">
+                        <h3 class="footer__heading">Vào cửa hàng trên ứng dụng</h3>
+                        <div class="footer__download">
+                            <img src="./assets/img/qr-img.png" alt="QR CODE" class="footer__download-qr">
+                            <div class="footer__download-apps">
+                                <a href="#" class="footer__download-app-link">
+                                    <img src="./assets/img/googleplay-img.png" alt="Google Play" class="footer__download-app-img">
+                                </a>
+                                <a href="#" class="footer__download-app-link">
+                                    <img src="./assets/img/appstore-img.png" alt="App Store" class="footer__download-app-img">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="grid wide">
+                    <p class="footer__text">© 2025 - Bản quyền thuộc về Công ty 6Group</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // --- THÔNG BÁO ---
+    const notifyContainer = document.getElementById("notify-items");
+    if (notifyContainer) {
+        fetch("https://dummyjson.com/products?limit=3")
+            .then((res) => res.json())
+            .then((data) => {
+                notifyContainer.innerHTML = "";
+                data.products.forEach(product => {
+                    const notifyItem = document.createElement("li");
+                    notifyItem.className = "header__notify-item header__notify-item--viewed";
+                    notifyItem.innerHTML = `
+                        <a href="product-detail.html?id=${product.id}" class="header__notify-link">
+                            <img src="${product.thumbnail}" alt="${product.title}" class="header__notify-img">
+                            <div class="header__notify-info">
+                                <span class="header__notify-name">${product.title}</span>
+                                <span class="header__notify-description">Mô tả: ${product.description.slice(0, 30)}...</span>
+                            </div>
+                        </a>
+                    `;
+                    notifyContainer.appendChild(notifyItem);
+                });
+            })
+            .catch((error) => {
+                console.error("Lỗi khi tải thông báo:", error);
+            });
+    }
+        // Hiển thị giỏ hàng lớn
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartContent = document.getElementById('cart-content');
+        const cartTotal = document.getElementById('cart-total');
+        const cartActions = document.getElementById('cart-actions');
+        const toast = document.getElementById('toast');
+        // Hiển thị mini cart trên header
+        const cartNotice = document.getElementById('cart-notice');
+        const cartItemsMini = document.getElementById('cart-items');
+        const cartTotalMini = document.getElementById('cart-total-mini');
+
+        function showToast(msg, color = "#2d326b") {
+            toast.textContent = msg;
+            toast.style.background = color;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 1700);
+        }
+
+        function renderCart() {
+            // Render cart lớn
+            if (cart.length === 0) {
+    cartContent.innerHTML = `
+        <div class="cart-empty">
+            <i class="fa fa-shopping-cart"></i> Giỏ hàng của bạn đang trống.
+        </div>
+        <div style="text-align:center; margin-top: 24px;">
+            <a href="index.html" class="btn">Tiếp tục mua sắm</a>
+        </div>
+    `;
+    cartTotal.textContent = '0';
+    cartActions.style.display = 'none';
+            } else {
+                cartActions.style.display = 'flex';
+                let total = 0;
+                let html = `
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                cart.forEach((item, idx) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    html += `
+                        <tr>
+                            <td><img src="${item.image}" alt="${item.title}"></td>
+                            <td>${item.title}</td>
+                            <td>$${item.price.toFixed(2)}</td>
+                            <td>
+                                <input type="number" min="1" value="${item.quantity}" data-idx="${idx}" class="cart-qty-input">
+                            </td>
+                            <td>$${itemTotal.toFixed(2)}</td>
+                            <td><button class="btn btn-remove" data-idx="${idx}" title="Xóa sản phẩm"><i class="fa fa-trash"></i></button></td>
+                        </tr>
+                    `;
+                });
+                html += `
+                        </tbody>
+                    </table>
+                `;
+                cartContent.innerHTML = html;
+                cartTotal.textContent = total.toFixed(2);
+            }
+            // Render mini cart trên header
+            if (cartNotice && cartItemsMini && cartTotalMini) {
+                cartNotice.textContent = cart.length;
+                let miniHtml = '';
+                let miniTotal = 0;
+                cart.forEach((item, idx) => {
+                    miniTotal += item.price * item.quantity;
+                    miniHtml += `
+                        <li class="header__cart-item">
+                            <img src="${item.image}" alt="${item.title}" class="header__cart-img">
+                            <div class="header__cart-item-info">
+                                <div class="header__cart-item-head">
+                                    <h5 class="header__cart-item-name">${item.title}</h5>
+                                    <div class="header__cart-item-price">$${item.price.toFixed(2)}</div>
+                                    <span class="header__cart-item-multiply">x</span>
+                                    <span class="header__cart-item-qnt">${item.quantity}</span>
+                                </div>
+                            </div>
+                            <div class="header__cart-item-remove" data-idx="${idx}" title="Xóa sản phẩm">Xóa</div>
+                        </li>
+                    `;
+                });
+                cartItemsMini.innerHTML = miniHtml;
+                cartTotalMini.textContent = miniTotal.toFixed(2);
+            }
+        }
+
+        // Xóa sản phẩm lớn
+        cartContent.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-remove')) {
+                const idx = e.target.closest('.btn-remove').dataset.idx;
+                const name = cart[idx].title;
+                cart.splice(idx, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+                showToast(`Đã xóa "${name}" khỏi giỏ hàng!`, "#e53935");
+            }
+        });
+
+        // Thay đổi số lượng lớn
+        cartContent.addEventListener('change', function(e) {
+            if (e.target.classList.contains('cart-qty-input')) {
+                const idx = e.target.dataset.idx;
+                let val = parseInt(e.target.value) || 1;
+                if (val < 1) val = 1;
+                cart[idx].quantity = val;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+                showToast('Đã cập nhật số lượng!', "#43a047");
+            }
+        });
+
+        // Xóa tất cả sản phẩm
+        document.getElementById('btn-clear-cart').addEventListener('click', function() {
+            if (cart.length === 0) return;
+            if (confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?')) {
+                cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+                showToast('Đã xóa toàn bộ giỏ hàng!', "#e53935");
+            }
+        });
+
+        // Thanh toán (demo)
+        document.getElementById('btn-checkout').addEventListener('click', function() {
+            if (cart.length === 0) {
+                showToast('Giỏ hàng trống!', "#e53935");
+                return;
+            }
+            showToast('Cảm ơn bạn đã mua hàng! (Demo)', "#43a047");
+            setTimeout(() => {
+                cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+            }, 1200);
+        });
+
+        // Xóa sản phẩm mini cart trên header
+        if (cartItemsMini) {
+            cartItemsMini.addEventListener('click', function(e) {
+                if (e.target.classList.contains('header__cart-item-remove')) {
+                    const idx = e.target.dataset.idx;
+                    const name = cart[idx].title;
+                    cart.splice(idx, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                    showToast(`Đã xóa "${name}" khỏi giỏ hàng!`, "#e53935");
+                }
+            });
+        }
+
+        renderCart();
+    </script>
+</body>
+</html>

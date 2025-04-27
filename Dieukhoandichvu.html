@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Điều khoản dịch vụ & Chính sách bảo mật | Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
+            font-size: 1.15em;
+        }
+        .terms-header {
+            display: flex;
+            align-items: center;
+            padding: 32px 0 24px 0;
+            background: #fff;
+            border-bottom: 1px solid #f2f2f2;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
+        }
+        .terms-header__icon {
+            font-size: 1.6em;
+            color: #3949ab;
+            margin-right: 12px;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .terms-header__text {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #1a237e;
+            letter-spacing: 1px;
+        }
+        .terms-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 32px rgba(30,40,120,0.13);
+            padding: 36px 36px 28px 36px;
+            text-align: justify;
+        }
+        h1 {
+            color: #3949ab;
+            font-size: 2em;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        h2 {
+            color: #3949ab;
+            font-size: 1.2em;
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+        ul {
+            margin-left: 18px;
+            padding: 0;
+        }
+        a {
+            color: #3949ab;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .section {
+            margin-bottom: 32px;
+        }
+        .updated {
+            color: #888;
+            font-size: 0.95em;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .faq-section {
+            margin-top: 40px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 24px 18px;
+        }
+        .faq-section h2 {
+            color: #1a237e;
+            margin-top: 0;
+        }
+        .faq-list {
+            list-style: none;
+            padding: 0;
+        }
+        .faq-list li {
+            margin-bottom: 18px;
+        }
+        .faq-question {
+            font-weight: bold;
+            cursor: pointer;
+            color: #3949ab;
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 6px;
+            color: #333;
+        }
+        .faq-list li.active .faq-answer {
+            display: block;
+        }
+        .feedback-section {
+            margin-top: 40px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 24px 18px;
+        }
+        .feedback-section h2 {
+            color: #1a237e;
+            margin-top: 0;
+        }
+        .feedback-form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .feedback-form textarea {
+            width: 100%;
+            min-height: 60px;
+            border-radius: 6px;
+            border: 1px solid #bdbdbd;
+            padding: 8px;
+            font-size: 1em;
+            margin-bottom: 12px;
+            resize: vertical;
+        }
+        .feedback-form button {
+            background: #3949ab;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .feedback-form button:hover {
+            background: #1a237e;
+        }
+        .feedback-success {
+            color: #388e3c;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+    
+    .terms-header {
+    display: flex;
+    align-items: center;
+    padding: 32px 0 24px 0;
+    background: #fff;
+    border-bottom: 1px solid #f2f2f2;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+}
+.terms-container {
+    max-width: 800px;
+    margin: 100px auto 40px auto; /* tăng nếu header cao */
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 32px rgba(30,40,120,0.13);
+    padding: 36px 36px 28px 36px;
+}
+    @media (max-width: 739px) {
+        .terms-header {
+            padding: 18px 0 12px 0;
+        }
+        .terms-container {
+            margin: 70px 0 20px 0;
+            padding: 16px 4vw;
+        }
+    }
+</style>
+    
+</head>
+<body>
+    <div class="terms-header">
+        <span class="terms-header__icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </span>
+        <span class="terms-header__text">Điều khoản dịch vụ & Chính sách bảo mật</span>
+    </div>
+    <div class="terms-container">
+        <div class="updated">Cập nhật lần cuối: 25/04/2025</div>
+
+        <div class="section">
+            <h2>1. Điều khoản dịch vụ</h2>
+            <ul>
+                <li><strong>Đăng ký tài khoản:</strong> Người dùng phải cung cấp thông tin chính xác, đầy đủ khi đăng ký tài khoản trên Shopping. Người dùng chịu trách nhiệm bảo mật thông tin tài khoản và mật khẩu của mình.</li>
+                <li><strong>Quyền sử dụng:</strong> Người dùng chỉ được phép sử dụng dịch vụ của Shopping cho mục đích hợp pháp, không vi phạm pháp luật, thuần phong mỹ tục hoặc quyền lợi của bên thứ ba.</li>
+                <li><strong>Hành vi bị cấm:</strong>
+                    <ul>
+                        <li>Giả mạo thông tin cá nhân, lừa đảo hoặc gây nhầm lẫn cho người khác.</li>
+                        <li>Phát tán virus, phần mềm độc hại hoặc thực hiện các hành vi phá hoại hệ thống.</li>
+                        <li>Thu thập, sử dụng thông tin của người khác mà không được phép.</li>
+                        <li>Đăng tải nội dung vi phạm pháp luật, bản quyền, hoặc có tính chất xúc phạm, phân biệt đối xử.</li>
+                    </ul>
+                </li>
+                <li><strong>Thay đổi dịch vụ:</strong> Shopping có quyền thay đổi, nâng cấp, tạm ngưng hoặc ngừng cung cấp dịch vụ mà không cần thông báo trước. Chúng tôi không chịu trách nhiệm với bất kỳ thiệt hại nào phát sinh từ việc thay đổi này.</li>
+                <li><strong>Giới hạn trách nhiệm:</strong> Shopping không chịu trách nhiệm đối với các thiệt hại gián tiếp, ngẫu nhiên, đặc biệt hoặc do hậu quả của việc sử dụng hoặc không thể sử dụng dịch vụ.</li>
+                <li><strong>Chấm dứt tài khoản:</strong> Shopping có quyền tạm khóa hoặc chấm dứt tài khoản của người dùng nếu phát hiện vi phạm điều khoản dịch vụ hoặc có dấu hiệu gian lận, lạm dụng.</li>
+                <li><strong>Quy định về nội dung đăng tải:</strong> Người dùng không được đăng tải các nội dung quảng cáo trái phép, nội dung phản cảm, hoặc nội dung vi phạm bản quyền.</li>
+                <li><strong>Hỗ trợ khách hàng:</strong> Shopping cung cấp kênh hỗ trợ khách hàng qua email, hotline và trang trợ giúp trực tuyến.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>2. Chính sách bảo mật</h2>
+            <ul>
+                <li><strong>Thu thập thông tin:</strong> Chúng tôi thu thập các thông tin cá nhân như tên, email, số điện thoại, địa chỉ giao hàng, lịch sử giao dịch... khi bạn đăng ký và sử dụng dịch vụ.</li>
+                <li><strong>Mục đích sử dụng:</strong>
+                    <ul>
+                        <li>Xử lý đơn hàng, cung cấp dịch vụ và hỗ trợ khách hàng.</li>
+                        <li>Cải thiện chất lượng dịch vụ, cá nhân hóa trải nghiệm người dùng.</li>
+                        <li>Gửi thông báo, khuyến mãi, bản tin nếu bạn đồng ý nhận.</li>
+                        <li>Đáp ứng yêu cầu pháp lý từ cơ quan chức năng.</li>
+                    </ul>
+                </li>
+                <li><strong>Bảo mật thông tin:</strong> Thông tin cá nhân của bạn được bảo vệ bằng các biện pháp kỹ thuật và tổ chức phù hợp. Chỉ nhân viên có thẩm quyền mới được truy cập thông tin này.</li>
+                <li><strong>Chia sẻ thông tin:</strong> Chúng tôi không chia sẻ thông tin cá nhân của bạn cho bên thứ ba, trừ các trường hợp:
+                    <ul>
+                        <li>Bạn đồng ý chia sẻ hoặc yêu cầu chia sẻ.</li>
+                        <li>Đáp ứng yêu cầu của pháp luật hoặc cơ quan nhà nước có thẩm quyền.</li>
+                        <li>Đối tác vận chuyển, thanh toán để hoàn tất đơn hàng.</li>
+                    </ul>
+                </li>
+                <li><strong>Quyền của người dùng:</strong>
+                    <ul>
+                        <li>Truy cập, chỉnh sửa hoặc xóa thông tin cá nhân bất cứ lúc nào.</li>
+                        <li>Yêu cầu ngừng nhận thông báo quảng cáo.</li>
+                        <li>Liên hệ với chúng tôi để được hỗ trợ về quyền riêng tư.</li>
+                    </ul>
+                </li>
+                <li><strong>Lưu trữ dữ liệu:</strong> Thông tin cá nhân được lưu trữ trong thời gian cần thiết để cung cấp dịch vụ hoặc theo quy định của pháp luật.</li>
+                <li><strong>Bảo vệ trẻ em:</strong> Shopping không chủ động thu thập thông tin từ trẻ em dưới 16 tuổi. Nếu phát hiện có thông tin trẻ em, chúng tôi sẽ xóa ngay lập tức khi nhận được yêu cầu từ phụ huynh hoặc người giám hộ.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>3. Quy định về giao dịch và thanh toán</h2>
+            <ul>
+                <li>Người dùng chịu trách nhiệm về tính hợp pháp của các giao dịch thực hiện trên Shopping.</li>
+                <li>Thanh toán được thực hiện qua các phương thức hợp lệ do Shopping cung cấp (chuyển khoản, ví điện tử, COD, thẻ tín dụng...).</li>
+                <li>Shopping không chịu trách nhiệm với các giao dịch ngoài hệ thống hoặc giao dịch không hợp lệ.</li>
+                <li>Hóa đơn điện tử sẽ được gửi qua email hoặc tài khoản cá nhân của người dùng sau khi giao dịch thành công.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>4. Chính sách đổi trả và hoàn tiền</h2>
+            <ul>
+                <li>Khách hàng có quyền yêu cầu đổi trả hoặc hoàn tiền theo quy định được công bố trên từng sản phẩm/dịch vụ.</li>
+                <li>Yêu cầu đổi trả/hoàn tiền phải được gửi trong thời gian quy định và kèm theo bằng chứng hợp lệ.</li>
+                <li>Shopping sẽ xử lý yêu cầu trong vòng 7 ngày làm việc kể từ khi nhận đủ thông tin.</li>
+                <li>Hoàn tiền sẽ được thực hiện qua phương thức thanh toán ban đầu hoặc theo thỏa thuận với khách hàng.</li>
+                <li>Mọi thắc mắc về đổi trả/hoàn tiền vui lòng liên hệ bộ phận hỗ trợ khách hàng.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>5. Quyền sở hữu trí tuệ</h2>
+            <ul>
+                <li>Tất cả nội dung, hình ảnh, logo, nhãn hiệu trên Shopping đều thuộc quyền sở hữu của chúng tôi hoặc đối tác liên kết.</li>
+                <li>Nghiêm cấm sao chép, sử dụng lại nội dung mà không có sự đồng ý bằng văn bản từ Shopping.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>6. Liên hệ</h2>
+            <p>Nếu bạn có bất kỳ câu hỏi hoặc yêu cầu nào liên quan đến điều khoản dịch vụ hoặc chính sách bảo mật, vui lòng liên hệ:</p>
+            <ul>
+                <li>Email: doa362023@gmail.com</li>
+                <li>Hotline: 086565xxx0</li>
+                <li>Địa chỉ: NEU</li>
+            </ul>
+        </div>
+
+        <div class="faq-section">
+            <h2>Câu hỏi thường gặp</h2>
+            <ul class="faq-list">
+                <li>
+                    <div class="faq-question">Tôi có thể thay đổi thông tin cá nhân như thế nào?</div>
+                    <div class="faq-answer">Bạn có thể đăng nhập vào tài khoản, vào phần "Thông tin cá nhân" để chỉnh sửa các thông tin như tên, email, số điện thoại, địa chỉ giao hàng.</div>
+                </li>
+                <li>
+                    <div class="faq-question">Làm sao để yêu cầu hoàn tiền?</div>
+                    <div class="faq-answer">Bạn gửi yêu cầu hoàn tiền qua trang "Lịch sử đơn hàng" hoặc liên hệ bộ phận hỗ trợ khách hàng. Vui lòng cung cấp mã đơn hàng và lý do hoàn tiền.</div>
+                </li>
+                <li>
+                    <div class="faq-question">Thông tin cá nhân của tôi có được bảo mật không?</div>
+                    <div class="faq-answer">Chúng tôi cam kết bảo mật thông tin cá nhân của bạn và không chia sẻ cho bên thứ ba nếu không có sự đồng ý của bạn, trừ trường hợp pháp luật yêu cầu.</div>
+                </li>
+                <li>
+                    <div class="faq-question">Tôi có thể xóa tài khoản không?</div>
+                    <div class="faq-answer">Bạn có thể gửi yêu cầu xóa tài khoản qua email hoặc trang trợ giúp. Sau khi xác minh, chúng tôi sẽ xóa tài khoản và thông tin liên quan.</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="feedback-section">
+            <h2>Góp ý &amp; Phản hồi</h2>
+            <form class="feedback-form" id="feedbackForm">
+                <label for="feedback">Nội dung góp ý hoặc phản hồi:</label>
+                <textarea id="feedback" required placeholder="Nhập góp ý hoặc phản hồi của bạn..."></textarea>
+                <button type="submit">Gửi góp ý</button>
+                <div class="feedback-success" id="feedbackSuccess" style="display:none;">Cảm ơn bạn đã gửi góp ý!</div>
+            </form>
+        </div>
+
+        <div class="section" style="font-size:0.97em;color:#888;">
+            Việc sử dụng dịch vụ của Shopping đồng nghĩa với việc bạn đã đọc, hiểu và đồng ý với tất cả các điều khoản và chính sách trên.
+        </div>
+    </div>
+    <script>
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(function(q) {
+            q.addEventListener('click', function() {
+                var li = this.parentElement;
+                li.classList.toggle('active');
+            });
+        });
+
+        // Feedback form
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('feedbackSuccess').style.display = 'block';
+            this.reset();
+            setTimeout(function() {
+                document.getElementById('feedbackSuccess').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

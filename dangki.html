@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký | Shopping</title>
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
+            font-size: 1.18em;
+        }
+        .register-header {
+            display: flex;
+            align-items: center;
+            padding: 32px 0 24px 0;
+            background: #fff;
+            border-bottom: 1px solid #f2f2f2;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .register-header__logo {
+            height: 48px;
+            margin-right: 12px;
+        }
+        .register-header__title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1a237e;
+            margin-right: 12px;
+        }
+        .register-header__text {
+            font-size: 1.7em;
+            color: #222;
+            font-weight: bold;
+        }
+        .register-main {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            min-height: 80vh;
+            background: transparent;
+        }
+        .register-form-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 32px rgba(30,40,120,0.13);
+            padding: 36px 36px 28px 36px;
+            min-width: 350px;
+            max-width: 400px;
+            margin: 60px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: none;}
+        }
+        .register-form-title {
+            font-size: 2.1em;
+            font-weight: bold;
+            margin-bottom: 18px;
+            color: #1a237e;
+            letter-spacing: 1px;
+        }
+        .register-form label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            display: block;
+            font-size: 1.18em;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 18px;
+        }
+        .register-form input {
+            width: 100%;
+            padding: 10px 38px 10px 12px;
+            border: 1.5px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.18em;
+            outline: none;
+            transition: border 0.2s;
+            background: #f7f8fa;
+        }
+        .register-form input:focus {
+            border: 1.5px solid #1a237e;
+            background: #fff;
+        }
+        .input-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 1.25em;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .input-icon:hover {
+            color: #1a237e;
+        }
+        .error-message {
+            color: #e53935;
+            font-size: 1.12em;
+            margin-bottom: 8px;
+            min-height: 18px;
+        }
+        .register-form .register-btn {
+            width: 100%;
+            background: #1a237e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 0;
+            font-size: 1.18em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .register-form .register-btn:disabled {
+            background: #bfcaff;
+            cursor: not-allowed;
+        }
+        .register-form .register-btn .spinner {
+            border: 2px solid #fff;
+            border-top: 2px solid #3949ab;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 0.7s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0);}
+            100% { transform: rotate(360deg);}
+        }
+        .register-link {
+            text-align:center;
+            margin-top:18px;
+            color:#888;
+            font-size: 1.12em;
+        }
+        .register-link a {
+            color:#1a237e;
+            text-decoration:none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .register-link a:hover {
+            color: #3949ab;
+            text-decoration: underline;
+        }
+        .register-header__logo {
+    height: 48px;
+    width: 160px;
+    margin-right: 18px;
+    background: #3949ab;
+    border-radius: 6px;
+    padding: 6px 18px;
+    box-shadow: 0 2px 8px rgba(30,40,120,0.10);
+    object-fit: contain;
+    display: block;
+}
+        
+        @media (max-width: 600px) {
+            .register-form-container {
+                min-width: unset;
+                max-width: 98vw;
+                padding: 18px 4vw 18px 4vw;
+                margin: 24px 0;
+            }
+            .register-header {
+                flex-direction: column;
+                padding: 18px 0 12px 0;
+            }
+            
+        }
+        .register-header {
+    position: relative;
+}
+.register-header__help-fixed {
+    position: absolute;
+    right: 32px;
+    top: 38px;
+    color: #3949ab;
+    font-size: 1.08em;
+    font-weight: 400;
+    opacity: 0.85;
+    cursor: pointer;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+.register-header__help-fixed:hover {
+    color: #1a237e;
+    text-decoration: underline;
+}
+
+.register-policy {
+    color: #bdbdbd;
+    font-size: 0.98em;
+    text-align: center;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+.register-policy a {
+    color: #1a237e;
+    text-decoration: none;
+    font-weight: 500;
+    transition: text-decoration 0.2s;
+}
+.register-policy a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <div class="register-header">
+        <a href="Trangchu.html">
+        <img src="./assets/img/shopping-logo-1.png" alt="Shopping Logo" class="register-header__logo">
+        </a>
+        <span class="register-header__text">Đăng ký</span>
+        <span class="register-header__help-fixed"><a href="trogiup.html" >Bạn cần giúp đỡ?</a></span>
+
+    </div>
+    <div class="register-main">
+        <div class="register-form-container">
+            <div class="register-form-title">Tạo tài khoản mới</div>
+            <form class="register-form" id="registerForm" autocomplete="off">
+                <div class="error-message" id="registerError"></div>
+                <label for="register-username">Tên đăng nhập</label>
+                <div class="input-group">
+                    <input type="text" id="register-username" placeholder="Nhập tên đăng nhập" required>
+                    <span class="input-icon"><i class="fa-regular fa-user"></i></span>
+                </div>
+                <label for="register-email">Email</label>
+                <div class="input-group">
+                    <input type="email" id="register-email" placeholder="Nhập email" required>
+                    <span class="input-icon"><i class="fa-regular fa-envelope"></i></span>
+                </div>
+                <label for="register-password">Mật khẩu</label>
+                <div class="input-group">
+                    <input type="password" id="register-password" placeholder="Nhập mật khẩu" required>
+                    <span class="input-icon" id="toggleRegisterPassword" title="Hiện/ẩn mật khẩu"><i class="fa-regular fa-eye"></i></span>
+                </div>
+                <label for="register-password2">Nhập lại mật khẩu</label>
+                <div class="input-group">
+                    <input type="password" id="register-password2" placeholder="Nhập lại mật khẩu" required>
+                    <span class="input-icon" id="toggleRegisterPassword2" title="Hiện/ẩn mật khẩu"><i class="fa-regular fa-eye"></i></span>
+                </div>
+                <button type="submit" class="register-btn" id="registerBtn">ĐĂNG KÝ</button>
+            </form>
+            <div class="register-policy">
+                Bằng việc đăng kí, bạn đã đồng ý với Shopping về<br>
+                <a href="Dieukhoandichvu.html">Điều khoản dịch vụ</a> &amp; <a href="Dieukhoandichvu.html">Chính sách bảo mật</a>
+            </div>
+            <div class="register-link">
+                Đã có tài khoản? <a href="dangnhap.html">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Hiện/ẩn mật khẩu
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            icon.addEventListener('click', function() {
+                const type = input.type === 'password' ? 'text' : 'password';
+                input.type = type;
+                this.innerHTML = type === 'password'
+                    ? '<i class="fa-regular fa-eye"></i>'
+                    : '<i class="fa-regular fa-eye-slash"></i>';
+            });
+        }
+        togglePassword('register-password', 'toggleRegisterPassword');
+        togglePassword('register-password2', 'toggleRegisterPassword2');
+
+        // Validate form & loading
+        const registerForm = document.getElementById('registerForm');
+        const registerBtn = document.getElementById('registerBtn');
+        const registerError = document.getElementById('registerError');
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            registerError.style.color = '#e53935';
+            registerError.textContent = '';
+            registerBtn.disabled = true;
+            registerBtn.innerHTML = 'ĐANG XỬ LÝ <span class="spinner"></span>';
+
+            // Lấy giá trị
+            const username = document.getElementById('register-username').value.trim();
+            const email = document.getElementById('register-email').value.trim();
+            const password = document.getElementById('register-password').value.trim();
+            const password2 = document.getElementById('register-password2').value.trim();
+
+            // Validate cơ bản
+            setTimeout(() => {
+                if (!username || !email || !password || !password2) {
+                    registerError.textContent = 'Vui lòng nhập đầy đủ thông tin!';
+                    registerBtn.disabled = false;
+                    registerBtn.innerHTML = 'ĐĂNG KÝ';
+                    return;
+                }
+                if (!/^[\w.-]+@[\w.-]+\.\w{2,}$/.test(email)) {
+                    registerError.textContent = 'Email không hợp lệ!';
+                    registerBtn.disabled = false;
+                    registerBtn.innerHTML = 'ĐĂNG KÝ';
+                    return;
+                }
+                if (password.length < 6) {
+                    registerError.textContent = 'Mật khẩu phải có ít nhất 6 ký tự!';
+                    registerBtn.disabled = false;
+                    registerBtn.innerHTML = 'ĐĂNG KÝ';
+                    return;
+                }
+                if (password !== password2) {
+                    registerError.textContent = 'Mật khẩu nhập lại không khớp!';
+                    registerBtn.disabled = false;
+                    registerBtn.innerHTML = 'ĐĂNG KÝ';
+                    return;
+                }
+                // Giả lập đăng ký thành công
+                registerError.style.color = '#388e3c';
+                registerError.textContent = 'Đăng ký thành công! Đang chuyển hướng...';
+                registerBtn.innerHTML = 'THÀNH CÔNG';
+                setTimeout(() => {
+                    window.location.href = 'dangnhap.html';
+                }, 1200);
+            }, 900);
+        });
+    </script>
+</body>
+</html>

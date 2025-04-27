@@ -13,6 +13,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.7.2-web/fontawesome-free-6.7.2-web/css/all.min.css">
     <script src="main.js"></script>
+    <style>
+        .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-width: 100%;
+    z-index: 1000;
+    background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.header-with-search {
+    padding: 12px 0 10px 0; /* Giảm padding trên/dưới để header gọn hơn */
+}
+.header__navbar {
+    padding: 4px 0; /* Giảm padding trên/dưới cho thanh navbar */
+}
+.header__sort-bar {
+    position: relative;
+    z-index: 1001;
+    margin-bottom: 0;
+}
+.app__container {
+    margin-top: 140px; /* Giảm margin-top để nội dung sát header hơn */
+}
+@media (max-width: 600px) {
+    .app__container {
+        margin-top: 100px;
+    }
+}
+    </style>
 </head>
 <body>
     <div class="app">
@@ -60,13 +92,13 @@
                                     <h3>Thông báo mới nhận</h3>
                                 </header>
 
-                                <ul class="header__notify-list">
+                                <ul class="header__notify-list" id="notify-items">
                                     <li class="header__notify-item header__notify-item--viewed">
                                         <a href="" class="header__notify-link">
                                             <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
-                                                <span class="header__notify-name">Mì Trộn Phô Mai Vị Cay Ottogi</span>
-                                                <span class="header__notify-description">Mô tả: Vị Cay</span>
+                                                <span class="header__notify-name"></span>
+                                                <span class="header__notify-description"></span>
                                             </div>
                                         </a>
                                     </li>
@@ -75,8 +107,8 @@
                                         <a href="" class="header__notify-link">
                                             <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
-                                                <span class="header__notify-name">Mì Trộn Phô Mai Vị Cay Ottogi</span>
-                                                <span class="header__notify-description">Mô tả: Vị Cay</span>
+                                                <span class="header__notify-name"></span>
+                                                <span class="header__notify-description"></span>
                                             </div>
                                         </a>
                                     </li>
@@ -84,8 +116,8 @@
                                         <a href="" class="header__notify-link">
                                             <img src="./assets/img/mi-tom-sp2.JPG" alt="" class="header__notify-img">
                                             <div class="header__notify-info">
-                                                <span class="header__notify-name">Mì Trộn Phô Mai Vị Cay Ottogi</span>
-                                                <span class="header__notify-description">Mô tả: Vị Cay</span>
+                                                <span class="header__notify-name"></span>
+                                                <span class="header__notify-description"></span>
                                             </div>
                                         </a>
                                     </li>
@@ -98,7 +130,7 @@
                         </li>
 
                         <li class="header__navbar-item">
-                            <a href="#" class="header__navbar-item-link">
+                            <a href="trogiup.html" class="header__navbar-item-link">
                                 <i class="header__navbar-icon fa-solid fa-question"></i>
                                 Trợ giúp
                             </a>
@@ -152,13 +184,13 @@
                                 <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
                                 <ul class="header__search-history-list">
                                     <li class="header__search-history-item">
-                                        <a href="">Kem dưỡng da</a>
+                                        <a href="">Milk</a>
                                     </li>
                                     <li class="header__search-history-item">
-                                        <a href="">Quần áo nam nữ</a>
+                                        <a href="">Lemon</a>
                                     </li>
                                     <li class="header__search-history-item">
-                                        <a href="">Giày thể thao</a>
+                                        <a href="">Man Plaid Shirt</a>
                                     </li>
                                 </ul>
                             </div>
@@ -201,13 +233,11 @@
                                 </div>
                                 
                                 <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                <ul class="header__cart-list-item" id="cart-items"></ul>
-                                
-                                <div class="cart-total">
+                                <<ul class="header__cart-list-item" id="cart-items"></ul>
+                                <div class="cart-total" style="margin: 16px 0 8px 0; text-align: right;">
                                     <span>Tổng tiền: $<span id="cart-total">0</span></span>
                                 </div>
-                                
-                                <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                                <a href="cart.html" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                             </div>
                         </div>
                     </div>
@@ -243,53 +273,45 @@
                             </h3>
 
                             <ul class="category-list">
-                                <li class="category-item category-item--active">
-                                    <a href="#" class="category-item__link">Thiết bị tiện ích</a>
-                                </li>
-            
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Thiết bị điện gia dụng</a>
-                                </li>
-            
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Đồ dùng phòng bếp</a>
-                                </li>
+                                <!-- Cập nhật các mục danh mục với data-category tương ứng -->
+<li class="category-item">
+    <a href="#" class="category-item__link" data-category="all">Tất cả</a>
+</li>
+<li class="category-item category-item--active">
+    <a href="#" class="category-item__link" data-category="smartphones">Thiết bị tiện ích</a>
+</li>
+<li class="category-item">
+    <a href="#" class="category-item__link" data-category="home-decoration">Thiết bị điện gia dụng</a>
+</li>
 
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Dụng cụ nhà bếp</a>
-                                </li>
-            
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Phụ kiện bàn ăn</a>
-                                </li>
+<li class="category-item">
+    <a href="#" class="category-item__link" data-category="kitchen">Đồ dùng phòng bếp</a>
+</li>
+<!-- Chăm sóc nhà cửa -->
+<li class="category-item">
+    <a href="#" class="category-item__link" data-category="home-decoration,furniture,lighting,groceries">Chăm sóc nhà cửa</a>
+</li>
 
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Chăm sóc nhà cửa</a>
-                                </li>
+<!-- Thời trang nam -->
+<li class="category-item">
+    <a href="#" class="category-item__link" data-category="mens-shirts,mens-shoes,mens-watches">Thời trang nam</a>
+</li>
 
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Thời trang nam</a>
-                                </li>
+<!-- Thời trang nữ -->
+<li class="category-item">
+    <a href="#" class="category-item__link" data-category="womens-dresses,womens-shoes,womens-watches,womens-bags,womens-jewellery">Thời trang nữ</a>
+</li>
 
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Thời trang nữ</a>
-                                </li>
+<!-- Dụng cụ Make up -->
+<li class="category-item">
+    <a href="#" class="category-item__link" data-category="fragrances">Dụng cụ Make up</a>
+</li>
 
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Mẹ & Bé</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Dụng cụ Make up</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Sản phẩm Skincare</a>
-                                </li>
-
-                                <li class="category-item">
-                                    <a href="#" class="category-item__link">Best Seller</a>
-                                </li>
+<!-- Sản phẩm Skincare -->
+<li class="category-item">
+    <a href="#" class="category-item__link" data-category="skincare">Sản phẩm Skincare</a>
+</li>
+<!-- ... (thêm data-category cho các mục còn lại theo category của API) -->
                             </ul>
                         </nav>
                     </div>
@@ -371,7 +393,11 @@
                                 </li>
                             </ul>
                         </nav>
-
+                        <div class="highlight-slider">
+                            <div class="highlight-slider__wrapper" id="highlight-slider-wrapper">
+                                <!-- JS sẽ chèn các sản phẩm nổi bật tại đây -->
+                            </div>
+                        </div>
                         <div class="home-product ">
                             <div class="row sm-gutter">
                                 <!-- Product item -->
@@ -379,46 +405,6 @@
                         </div>
 
                         <ul class="pagination home-product__pagination">
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">
-                                    <i class="pagination-item__icon fa-solid fa-angle-left"></i>
-                                </a>
-                            </li>
-
-                            <li class="pagination-item pagination-item--active">
-                                <a href="" class="pagination-item__link">1</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">2</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">3</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">4</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">5</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">...</a>
-                            </li>
-                            
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">14</a>
-                            </li>
-                            
-
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">
-                                    <i class="pagination-item__icon fa-solid fa-angle-right"></i>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                </div>
@@ -539,125 +525,5 @@
 
         </footer>
     </div>
-
-     <!-- Modal Layout -->
-<div class="modal">
-    <div class="modal__overlay" data-action="close-modal"></div>
-    <div class="modal__body">
-        <!-- Register Form -->
-        <div class="auth-form" data-type="register">
-            <div class="auth-form__container">
-                <div class="auth-form__header">
-                    <h3 class="auth-form__heading">Đăng ký</h3>
-                    <span class="auth-form__switch-btn" 
-                          data-action="switch-form" 
-                          data-target="login">
-                        Đăng nhập
-                    </span>
-                </div>
-                <form>
-                    <div class="auth-form__group">
-                        <input type="email" 
-                               class="auth-form__input" 
-                               placeholder="Email của bạn"
-                               required>
-                    </div>
-                    <div class="auth-form__group">
-                        <input type="password" 
-                               class="auth-form__input" 
-                               placeholder="Mật khẩu của bạn"
-                               required>
-                    </div>
-                    <div class="auth-form__group">
-                        <input type="password" 
-                               class="auth-form__input" 
-                               placeholder="Nhập lại mật khẩu"
-                               required>
-                    </div>
-                    <div class="auth-form__aside">
-                        <p class="auth-form__policy-text">
-                            Bằng việc đăng ký, bạn đồng ý với 
-                            <a href=""class="auth-form__text-link">Điều khoản dịch vụ</a> & 
-                            <a href="" class="auth-form__text-link">Chính sách bảo mật</a>
-                        </p>
-                    </div>
-                    <div class="auth-form__controls">
-                        <button type="button" 
-                                class="btn btn-normal auth-form__controls-back"
-                                data-action="close-modal">
-                            TRỞ LẠI
-                        </button>
-                        <button type="submit" class="btn btn--primary">ĐĂNG KÝ</button>
-                    </div>
-                </form>
-                <div class="auth-form__socials">
-                    <button class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
-                        <span class="auth-form__socials-title">Facebook</span>
-                    </button>
-                    <button class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                        <span class="auth-form__socials-title">Google</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Login Form -->
-        <div class="auth-form" data-type="login" style="display: none;">
-            <div class="auth-form__container">
-                <div class="auth-form__header">
-                    <h3 class="auth-form__heading">Đăng nhập</h3>
-                    <span class="auth-form__switch-btn" 
-                          data-action="switch-form" 
-                          data-target="register">
-                        Đăng ký
-                    </span>
-                </div>
-                <form>
-                    <div class="auth-form__group">
-                        <input type="email" 
-                               class="auth-form__input" 
-                               placeholder="Email của bạn"
-                               >
-                    </div>
-                    <div class="auth-form__group">
-                        <input type="password" 
-                               class="auth-form__input" 
-                               placeholder="Mật khẩu của bạn"
-                               >
-                    </div>
-                    <div class="auth-form__aside">
-                        <div class="auth-form__help">
-                            <a href="#" class="auth-form__help-link forgot-password">Quên mật khẩu</a>
-                            <span class="auth-form__help-separate"></span>
-                            <a href="#" class="auth-form__help-link need-help">Cần trợ giúp?</a>
-                        </div>
-                    </div>
-                    <div class="auth-form__controls">
-                        <button type="button" 
-                                class="btn btn-normal auth-form__controls-back"
-                                data-action="close-modal">
-                            TRỞ LẠI
-                        </button>
-                        <button type="submit" class="btn btn--primary">ĐĂNG NHẬP</button>
-                    </div>
-                </form>
-                <div class="auth-form__socials">
-                    <button class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
-                        <span class="auth-form__socials-title"> Facebook</span>
-                    </button>
-                    <button class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                        <span class="auth-form__socials-title"> Google</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 </body>
 </html>

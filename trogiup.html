@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trợ Giúp</title>
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.7.2-web/fontawesome-free-6.7.2-web/css/all.min.css">
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        font-size: 1.2em;
+    }
+    .header {
+        background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
+        color: #fff;
+        text-align: center;
+        padding: 32px 0 40px 0;
+        font-size: 1.2em;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 2em;
+        font-weight: bold;
+    }
+    .search-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0 80px 0;
+    }
+        .search-bar input {
+            width: 400px;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            font-size: 1em;
+            outline: none;
+        }
+        .search-bar button {
+            padding: 10px 24px;
+            background: #003366;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-sizing: border-box;
+        }
+        .search-bar button:hover {
+            background: #003366;
+        }
+        .main {
+        background: #fff;
+        padding: 120px 16px 40px 16px; /* tăng top padding để tránh bị header che */
+        max-width: 1200px;
+        margin: 0 auto;
+        font-size: 1.2em;
+    }
+        .category-section {
+            margin-bottom: 32px;
+        }
+        .category-section h2 {
+            color: #1a237e;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .category-item {
+            flex: 1 1 30%;
+            min-width: 260px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(60,60,60,0.08);
+            padding: 18px 0;
+            text-align: center;
+            font-size: 1em;
+            color: #222;
+            /* margin-bottom: 16px; */
+            transition: box-shadow 0.2s, background 0.2s;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .category-item:hover {
+            background: #f0f4fa;
+            box-shadow: 0 4px 18px rgba(60,60,60,0.13);
+        }
+        .help-section h2, .contact-section h2 {
+            color: #1a237e;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .help-list {
+            list-style: none;
+            padding: 0;
+        }
+        .help-item {
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 10px 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .help-item h3 {
+            margin: 0 0 5px;
+            color: #003366;
+            font-size: 1em;
+        }
+        .footer {
+            background: #fff;
+            border-top: 2px solid #003366;
+            padding: 20px 0 0 0;
+        }
+        .footer__heading {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-item {
+            margin-bottom: 8px;
+        }
+        .footer-item__link {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        .footer-item__link:hover {
+            color: #003366;
+        }
+        .footer__download {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer__download-qr {
+            width: 80px;
+            height: 80px;
+        }
+        .footer__download-app-img {
+            width: 120px;
+            height: auto;
+        }
+        .footer__bottom {
+            background: #f9f9f9;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1em;
+            color: #666;
+            margin-top: 20px;
+        }
+        /* Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-content {
+            background: #fff;
+            padding: 24px 32px;
+            border-radius: 8px;
+            min-width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .popup-close {
+            margin-top: 16px;
+            background: #003366;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        @media (max-width: 1024px) {
+            .category-list { flex-direction: column; gap: 10px; }
+            .category-item { min-width: unset; }
+            .search-bar { width: 100%; font-size: 10px; margin-top: 25px; padding: 10px 15px; }
+        }
+       
+.help-answer {
+    display: none;
+    padding: 8px 0 0 0;
+    color: #222;
+    font-size: 0.97em;
+    transition: all 0.2s;
+}
+.help-item.active .help-answer {
+    display: block;
+}
+.help-question {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    font-weight: 600;
+}
+.help-question::after {
+    content: '▼';
+    font-size: 0.8em;
+    float: right;
+    margin-left: 10px;
+    transition: transform 0.2s;
+}
+.help-item.active .help-question::after {
+    transform: rotate(-180deg);
+}
+.contact-section a{
+    text-decoration: none;
+    color:#333;
+}
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1>Trung tâm trợ giúp</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Nhập từ khóa hoặc nội dung cần tìm...">
+                <button>Tìm kiếm</button>
+            </div>
+        </header>
+        <main class="main">
+            <section class="category-section">
+                <h2>Danh mục trợ giúp</h2>
+                <ul class="category-list">
+                    <li class="category-item">Mua sắm cùng chúng tôi</li>
+                    <li class="category-item">Khuyến mãi & Ưu đãi</li>
+                    <li class="category-item">Thanh toán</li>
+                    <li class="category-item">Đơn hàng & Vận chuyển</li>
+                    <li class="category-item">Trả hàng & Hoàn tiền</li>
+                    <li class="category-item">Thông tin chung</li>
+                </ul>
+            </section>
+            <section class="help-section">
+                <h2>Câu hỏi thường gặp</h2>
+                <ul class="help-list">
+                    <li class="help-item collapsible">
+                        <h3 class="help-question">Làm thế nào để đặt hàng?</h3>
+                        <div class="help-answer">
+                            Để đặt hàng trên website của chúng tôi, bạn hãy thực hiện các bước sau:<br>
+                            1. Tìm kiếm sản phẩm mong muốn bằng thanh tìm kiếm hoặc duyệt qua các danh mục.<br>
+                            2. Nhấn vào sản phẩm để xem chi tiết, chọn số lượng và các thuộc tính (màu sắc, kích thước, ...).<br>
+                            3. Nhấn nút "Thêm vào giỏ hàng".<br>
+                            4. Vào giỏ hàng kiểm tra lại sản phẩm, sau đó nhấn "Thanh toán".<br>
+                            5. Điền đầy đủ thông tin giao hàng, chọn phương thức thanh toán và xác nhận đơn hàng.<br>
+                            Sau khi đặt hàng thành công, bạn sẽ nhận được email xác nhận và có thể theo dõi trạng thái đơn hàng trong tài khoản cá nhân.
+                        </div>
+                    </li>
+                    <li class="help-item collapsible">
+                        <h3 class="help-question">Phương thức thanh toán nào được hỗ trợ?</h3>
+                        <div class="help-answer">
+                            Chúng tôi hỗ trợ nhiều phương thức thanh toán linh hoạt:<br>
+                            - Thẻ tín dụng/ghi nợ (Visa, MasterCard, JCB, ...)<br>
+                            - Chuyển khoản ngân hàng qua Internet Banking<br>
+                            - Thanh toán khi nhận hàng (COD)<br>
+                            - Ví điện tử (Momo, ZaloPay, ShopeePay, ...)<br>
+                            Lưu ý: Một số phương thức có thể không áp dụng cho tất cả sản phẩm hoặc khu vực giao hàng.
+                        </div>
+                    </li>
+                    <li class="help-item collapsible">
+                        <h3 class="help-question">Làm thế nào để theo dõi đơn hàng?</h3>
+                        <div class="help-answer">
+                            Sau khi đặt hàng, bạn có thể theo dõi trạng thái đơn hàng bằng cách:<br>
+                            - Đăng nhập tài khoản, vào mục "Đơn mua" để xem chi tiết các đơn hàng đã đặt.<br>
+                            - Mỗi đơn hàng sẽ hiển thị trạng thái: Đang xử lý, Đang giao, Đã giao hoặc Đã hủy.<br>
+                            - Bạn cũng sẽ nhận được email thông báo khi đơn hàng thay đổi trạng thái.<br>
+                            Nếu cần hỗ trợ thêm, hãy liên hệ bộ phận CSKH của chúng tôi.
+                        </div>
+                    </li>
+                    <li class="help-item collapsible">
+                        <h3 class="help-question">Tôi có thể hủy đơn hàng sau khi đã đặt không?</h3>
+                        <div class="help-answer">
+                            Bạn có thể hủy đơn hàng nếu đơn hàng chưa được xác nhận vận chuyển.<br>
+                            Để hủy, hãy vào mục "Đơn mua", chọn đơn hàng muốn hủy và nhấn "Hủy đơn".<br>
+                            Nếu đơn hàng đã được chuyển cho đơn vị vận chuyển, bạn không thể hủy trực tuyến mà cần liên hệ CSKH để được hỗ trợ.<br>
+                            Lưu ý: Một số sản phẩm đặc biệt có thể không áp dụng chính sách hủy đơn.
+                        </div>
+                    </li>
+                    <li class="help-item collapsible">
+                        <h3 class="help-question">Làm sao để đổi trả sản phẩm?</h3>
+                        <div class="help-answer">
+                            Bạn có thể gửi yêu cầu đổi trả trong vòng 7 ngày kể từ khi nhận hàng.<br>
+                            Quy trình đổi trả:<br>
+                            1. Đăng nhập tài khoản, vào mục "Đơn mua", chọn đơn hàng và sản phẩm muốn đổi trả.<br>
+                            2. Nhấn "Yêu cầu đổi trả" và điền lý do, hình ảnh sản phẩm nếu cần.<br>
+                            3. Chờ xác nhận từ bộ phận CSKH.<br>
+                            4. Đóng gói sản phẩm và gửi về địa chỉ được hướng dẫn.<br>
+                            Sau khi nhận được sản phẩm, chúng tôi sẽ kiểm tra và hoàn tiền hoặc gửi sản phẩm thay thế cho bạn.
+                        </div>
+                    </li>
+                    <li class="help-item collapsible">
+                        <h3 class="help-question">Tôi có thể cập nhật địa chỉ giao hàng không?</h3>
+                        <div class="help-answer">
+                            Bạn có thể cập nhật địa chỉ giao hàng trong phần "Tài khoản" &gt; "Sổ địa chỉ".<br>
+                            Nếu đơn hàng đã đặt, bạn chỉ có thể thay đổi địa chỉ khi đơn chưa được xác nhận vận chuyển.<br>
+                            Nếu cần thay đổi sau khi đơn đã xác nhận, vui lòng liên hệ CSKH để được hỗ trợ nhanh nhất.
+                        </div>
+                    </li>
+                    <li class="help-item collapsible">
+                        <h3 class="help-question">Tôi không nhận được mã xác nhận đơn hàng?</h3>
+                        <div class="help-answer">
+                            Nếu bạn không nhận được mã xác nhận đơn hàng qua email hoặc SMS:<br>
+                            - Kiểm tra lại hộp thư rác/spam.<br>
+                            - Đảm bảo số điện thoại và email bạn nhập là chính xác.<br>
+                            - Nếu vẫn không nhận được, hãy liên hệ CSKH để được cấp lại mã xác nhận hoặc kiểm tra trạng thái đơn hàng.
+                        </div>
+                    </li>
+            <section class="contact-section">
+                <h2>Liên hệ với chúng tôi</h2>
+                <p>Nếu bạn cần thêm trợ giúp, vui lòng liên hệ qua:</p>
+                <ul>
+                    <li><a href="mailto:doa362023@gmail.com" id="contact-email">Email: doa362023@gmail.com</a></li>
+                    <li>Hotline: 086565xxx0</li>
+                    <li>Địa chỉ: NEU</li>
+                </ul>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="grid wide footer__content">
+                <div class="row sm-gutter">
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a class="footer-item__link">Trung tâm trợ giúp</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="footer-item__link">Shopping</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="footer-item__link">Hướng dẫn mua hàng</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Giới thiệu</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a class="footer-item__link">Giới thiệu chung</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="footer-item__link">Tuyển dụng</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="footer-item__link">Điều khoản</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Danh mục</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a class="footer-item__link">Dụng cụ & Thiết bị tiện ích</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="footer-item__link">Đồ gia dụng</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="footer-item__link">Quần áo</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-4 c-6">
+                        <h3 class="footer__heading">Theo dõi chúng tôi</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a class="footer-item__link"><i class="footer-item__icon fa-brands fa-facebook"></i> Facebook</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="footer-item__link"><i class="footer-item__icon fa-brands fa-instagram"></i> Instagram</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="footer-item__link"><i class="footer-item__icon fa-brands fa-linkedin"></i> Linkedin</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l-2-4 m-8 c-12">
+                        <h3 class="footer__heading">Vào cửa hàng trên ứng dụng</h3>
+                        <div class="footer__download">
+                            <img src="./assets/img/qr-img.png" alt="QR CODE" class="footer__download-qr">
+                            <div class="footer__download-apps">
+                                <a class="footer__download-app-link">
+                                    <img src="./assets/img/googleplay-img.png" alt="Google Play" class="footer__download-app-img">
+                                </a>
+                                <a class="footer__download-app-link">
+                                    <img src="./assets/img/appstore-img.png" alt="App Store" class="footer__download-app-img">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="grid wide">
+                    <p class="footer__text">© 2025 - Bản quyền thuộc về Công ty 6Group</p>
+                </div>
+            </div>
+        </footer>
+        <!-- Popup -->
+        <div class="popup" id="popup">
+            <div class="popup-content">
+                <div id="popup-message"></div>
+                <button class="popup-close" onclick="closePopup()">Đóng</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Footer link interaction
+        document.querySelectorAll('.footer-item__link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                showPopup('Tính năng đang phát triển!');
+            });
+        });
+
+        // Email popup
+        document.getElementById('contact-email').addEventListener('click', function(e) {
+            e.preventDefault();
+            showPopup('Email liên hệ: doa362023@gmail.com');
+        });
+
+        // Popup functions
+        function showPopup(message) {
+            document.getElementById('popup-message').textContent = message;
+            document.getElementById('popup').style.display = 'flex';
+        }
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+        // Đóng popup khi click ra ngoài
+        document.getElementById('popup').addEventListener('click', function(e) {
+            if (e.target === this) closePopup();
+        });
+        // Toggle mở/đóng câu trả lời FAQ
+        document.querySelectorAll('.help-question').forEach(function(q) {
+    q.setAttribute('tabindex', '0');
+    q.addEventListener('click', function() {
+        var item = this.parentElement;
+        var expanded = item.classList.toggle('active');
+        this.setAttribute('aria-expanded', expanded);
+    });
+    q.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') this.click();
+    });
+});
+    </script>
+</body>
+</html>
