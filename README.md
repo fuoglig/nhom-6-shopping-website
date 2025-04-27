@@ -99,45 +99,43 @@ Giao diện của dự án được lấy cảm hứng từ trang thương mại
 
 ## Cấu Trúc Thư Mục
 
-nhom-6-shopping-website
-│
-├── assets
-│   ├── css
-│   │   ├── base.css
-│   │   ├── grid.css
-│   │   ├── main.css
-│   │   └── responsive.css
-│   ├── favicon_io
-│   │   ├── favicon-1-32x32.png
-│   │   └── site.webmanifest
-│   ├── fonts
-│   │   └── fontawesome-free-...
-│   │       ├── css
-│   │       ├── js
-│   │       ├── less
-│   │       ├── metadata
-│   │       ├── scss
-│   │       ├── sprites
-│   │       ├── svgs
-│   │       ├── webfonts
-│   │       └── LICENSE.txt
-│   └── img
-│       ├── appstore-img.png
-│       ├── googleplay-img.png
-│       ├── no-cart.png
-│       ├── qr-img.png
-│       └── shopping-logo-1.png
-│
-├── cart.html
-├── dangki.html
-├── dangnhap.html
-├── Dieukhoandichvu.html
-├── index.html
-├── main.js
-├── product-detail.html
-├── README.md
-├── Trangchu.html
-└── trogiup.html
+nhom-6-shopping-website/
+- assets/
+  - css/
+    - base.css
+    - grid.css
+    - main.css
+    - responsive.css
+  - favicon_io/
+    - favicon-1-32x32.png
+    - site.webmanifest
+  - fonts/
+    - fontawesome-free-.../
+      - css/
+      - js/
+      - less/
+      - metadata/
+      - scss/
+      - sprites/
+      - svgs/
+      - webfonts/
+      - LICENSE.txt
+  - img/
+    - appstore-img.png
+    - googleplay-img.png
+    - no-cart.png
+    - qr-img.png
+    - shopping-logo-1.png
+- cart.html
+- dangki.html
+- dangnhap.html
+- Dieukhoandichvu.html
+- index.html
+- main.js
+- product-detail.html
+- README.md
+- Trangchu.html
+- trogiup.html
 
 ---
 
